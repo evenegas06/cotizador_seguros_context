@@ -1,8 +1,11 @@
 import Insurance from "./components/Insurance";
+import { QuoterProvider } from "./context/QuoterContext";
 
 function App() {
     return (
-        <Insurance />
+        <QuoterProvider>
+            <Insurance />
+        </QuoterProvider>
     );
 }
 

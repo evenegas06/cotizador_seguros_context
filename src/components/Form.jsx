@@ -1,9 +1,14 @@
+import { useContext } from "react";
 import BrandSelect from "./BrandSelect";
 import PlanRadioButton from "./PlanRadioButton";
 import YearSelect from "./YearSelect";
-
+import { QuoterContext } from "../context/QuoterContext";
 
 const Form = () => {
+    const { hola } = useContext(QuoterContext);
+
+    console.log(hola);
+
     return (
         <>
             <form>
