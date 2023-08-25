@@ -4,15 +4,15 @@ const YearSelect = () => {
     return (
         <div className="my-5">
             <label
-                htmlFor="brand"
+                htmlFor="year"
                 className="block mb-3 font-bold text-gray-400 uppercase"
             >
                 Año del automóvil
             </label>
 
             <select
-                name="brand"
-                id="brand"
+                name="year"
+                id="year"
                 className="w-full p-3 bg-white border border-gray-200"
             >
                 <option value="">
