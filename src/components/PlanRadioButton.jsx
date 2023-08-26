@@ -1,7 +1,11 @@
 import { Fragment } from "react";
 import { PAYMENT_PLANS } from "../utils/constants";
+import useQuoter from "../hooks/useQuoter";
 
 const PlanRadioButton = () => {
+    /* ----- Context ----- */
+    const { handleInputChange } = useQuoter();
+
     return (
         <div className="my-5">
             <label
@@ -24,6 +28,7 @@ const PlanRadioButton = () => {
                                 name="plan"
                                 id="plan"
                                 value={item.id}
+                                onChange={(event) => handleInputChange(event)}
                             />
                         </Fragment>
                     );

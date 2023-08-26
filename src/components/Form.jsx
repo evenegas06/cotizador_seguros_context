@@ -1,12 +1,35 @@
+import useQuoter from "../hooks/useQuoter";
 import BrandSelect from "./BrandSelect";
+import ErrorMessage from "./ErrorMessage";
 import PlanRadioButton from "./PlanRadioButton";
 import YearSelect from "./YearSelect";
 
 const Form = () => {
+    /* ----- Context ----- */
+    const { data, error, setError } = useQuoter();
+
+    /**
+     * Submit form.
+     * 
+     * @param {Object} event 
+     */
+    const submit = (event) => {
+        event.preventDefault();
+
+        if (Object.values(data).includes('')) {
+            setError('Todos los campos obligatorios.');
+            return;
+        }
+
+        setError('');
+
+        // TODO: quoter...
+    };
 
     return (
         <>
-            <form>
+            {error && <ErrorMessage />}
+            <form onSubmit={submit}>
                 <BrandSelect />
 
                 <YearSelect />

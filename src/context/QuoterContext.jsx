@@ -3,8 +3,13 @@ import { createContext, useState } from "react";
 export const QuoterContext = createContext();
 
 export const QuoterProvider = ({ children }) => {
-    /* ----- State ----- */
-    const [data, setData] = useState({});
+    /* ----- States ----- */
+    const [data, setData] = useState({
+        brand: '',
+        year: '',
+        plan: ''
+    });
+    const [error, setError] = useState('');
 
     /**
      * Save input values on *data* state.
@@ -24,6 +29,8 @@ export const QuoterProvider = ({ children }) => {
         <QuoterContext.Provider value={{
             data,
             handleInputChange,
+            error,
+            setError,
         }}>
             {children}
         </QuoterContext.Provider>
