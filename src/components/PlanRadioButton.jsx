@@ -20,7 +20,7 @@ const PlanRadioButton = () => {
                     return (
                         <Fragment key={item.id}>
                             <label htmlFor="plan">
-                                {item.id}
+                                {item.name}
                             </label>
 
                             <input

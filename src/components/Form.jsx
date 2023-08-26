@@ -6,7 +6,7 @@ import YearSelect from "./YearSelect";
 
 const Form = () => {
     /* ----- Context ----- */
-    const { data, error, setError } = useQuoter();
+    const { data, error, setError, quote } = useQuoter();
 
     /**
      * Submit form.
@@ -22,8 +22,8 @@ const Form = () => {
         }
 
         setError('');
-
-        // TODO: quoter...
+        quote();
+        
     };
 
     return (

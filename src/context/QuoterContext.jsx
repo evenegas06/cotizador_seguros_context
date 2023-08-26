@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { formatCurrency } from "../utils/helpers";
 
 export const QuoterContext = createContext();
 
@@ -10,6 +11,7 @@ export const QuoterProvider = ({ children }) => {
         plan: ''
     });
     const [error, setError] = useState('');
+    const [total_cost, setTotalCost] = useState('');
 
     /**
      * Save input values on *data* state.
@@ -25,12 +27,50 @@ export const QuoterProvider = ({ children }) => {
         });
     };
 
+    const quote = () => {
+        const base_price = 2000;
+        const years_difference = new Date().getFullYear() - data.year;
+        let increment;
+
+        // 3% less each year.
+        let total = base_price - ((years_difference * 3) * base_price) / 100;
+
+        switch (data.brand) {
+            case "1":
+                increment = 1.3; // Europeo 30%
+                break;
+            case "2":
+                increment = 1.15; // Americano 15%
+                break;
+            case "3":
+                increment = 1.05; // Asiático 5%
+                break;
+            default:
+                increment = 1;
+                break;
+        }
+
+        total *= increment;
+        
+        /**
+         * plan basic 20%
+         * plan complete 50%
+         */
+        total *= data.plan == "1" ? 1.2 : 1.5;
+
+        total = formatCurrency(total);
+
+        setTotalCost(total);
+
+    };
+
     return (
         <QuoterContext.Provider value={{
             data,
             handleInputChange,
             error,
             setError,
+            quote
         }}>
             {children}
         </QuoterContext.Provider>
