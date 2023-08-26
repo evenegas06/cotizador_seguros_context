@@ -1,6 +1,12 @@
+import useQuoter from "../hooks/useQuoter";
 import Form from "./Form";
+import Spinner from "./Spinner";
+import TotalCost from "./TotalCost";
 
 const Insurance = () => {
+    /* ----- Context ----- */
+    const { loading } = useQuoter();
+
     return (
         <>
             <header className="my-10">
@@ -11,6 +17,8 @@ const Insurance = () => {
 
             <main className="bg-white md:w-2/3 lg:w-2/4 mx-auto shadow rounded-lg p-10">
                 <Form />
+
+                {loading ? <Spinner /> : <TotalCost />}
             </main>
         </>
     );

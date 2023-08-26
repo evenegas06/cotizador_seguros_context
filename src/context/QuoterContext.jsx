@@ -12,6 +12,7 @@ export const QuoterProvider = ({ children }) => {
     });
     const [error, setError] = useState('');
     const [total_cost, setTotalCost] = useState('');
+    const [loading, setLoading] = useState(false);
 
     /**
      * Save input values on *data* state.
@@ -36,7 +37,7 @@ export const QuoterProvider = ({ children }) => {
         const base_price = 2000;
         const years_difference = new Date().getFullYear() - data.year;
 
-        // 3% less each year.
+        /* 3% less each year. */
         let total = base_price - ((years_difference * 3) * base_price) / 100;
 
         switch (data.brand) {
@@ -56,14 +57,16 @@ export const QuoterProvider = ({ children }) => {
 
         total *= increment;
 
-        // plan basic 20%
-        // plan complete 50%
+        /* basic: 20%, complete: 50% */
         total *= data.plan == "1" ? 1.2 : 1.5;
 
         total = formatCurrency(total);
+        setLoading(true);
 
-        setTotalCost(total);
-
+        setTimeout(() => {
+            setTotalCost(total);
+            setLoading(false);
+        }, 2000);
     };
 
     return (
@@ -72,7 +75,9 @@ export const QuoterProvider = ({ children }) => {
             handleInputChange,
             error,
             setError,
-            quote
+            quote,
+            loading,
+            total_cost,
         }}>
             {children}
         </QuoterContext.Provider>
