@@ -27,10 +27,14 @@ export const QuoterProvider = ({ children }) => {
         });
     };
 
+    /**
+     * Calculate total insurance and set on state. 
+     */
     const quote = () => {
+        let increment;
+
         const base_price = 2000;
         const years_difference = new Date().getFullYear() - data.year;
-        let increment;
 
         // 3% less each year.
         let total = base_price - ((years_difference * 3) * base_price) / 100;
@@ -51,11 +55,9 @@ export const QuoterProvider = ({ children }) => {
         }
 
         total *= increment;
-        
-        /**
-         * plan basic 20%
-         * plan complete 50%
-         */
+
+        // plan basic 20%
+        // plan complete 50%
         total *= data.plan == "1" ? 1.2 : 1.5;
 
         total = formatCurrency(total);
