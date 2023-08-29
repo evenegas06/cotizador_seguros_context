@@ -1,3 +1,4 @@
+import { useMemo, useRef } from "react";
 import useQuoter from "../hooks/useQuoter";
 import { BRANDS, PAYMENT_PLANS } from "../utils/constants";
 
@@ -5,13 +6,20 @@ const TotalCost = () => {
     /* ----- Context ----- */
     const { total_cost, data } = useQuoter();
 
-    const [brand] = BRANDS.filter((item) => {
-        return item.id === Number(data.brand);
-    });
+    /* ----- Hooks ----- */
+    const year = useRef(data.year);
 
-    const [plan] = PAYMENT_PLANS.filter((item) => {
-        return item.id === Number(data.plan);
-    });
+    const [brand] = useMemo(() => {
+        return BRANDS.filter((item) => {
+            return item.id === Number(data.brand);
+        });
+    }, [total_cost]);
+
+    const [plan] = useMemo(() => {
+        return PAYMENT_PLANS.filter((item) => {
+            return item.id === Number(data.plan);
+        });
+    }, [total_cost]);
 
     if (total_cost === '') {
         return null;
@@ -29,13 +37,13 @@ const TotalCost = () => {
             </p>
 
             <p className="my-2">
-                <span className="font-bold">Marca: </span>
+                <span className="font-bold">Plan: </span>
                 {plan.name}
             </p>
 
             <p className="my-2">
-                <span className="font-bold">Marca: </span>
-                {data.year}
+                <span className="font-bold">Año del auto: </span>
+                {year.current}
             </p>
 
             <p className="my-2 text-2xl">
