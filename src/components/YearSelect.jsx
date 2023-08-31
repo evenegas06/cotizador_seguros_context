@@ -21,7 +21,7 @@ const YearSelect = () => {
                 onChange={(event) => handleInputChange(event)}
             >
                 <option value="">
-                    -- Selecciona una marca --
+                    -- Selecciona el año --
                 </option>
 
                 {YEARS.map((item) => {
